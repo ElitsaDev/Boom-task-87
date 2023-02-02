@@ -1,5 +1,5 @@
 import "../scss/app.scss";
-import {pluck} from 'ramda';
+import * as R from 'ramda';
 
 window.addEventListener("DOMContentLoaded", () => {
   // This block will be executed once the page is loaded and ready
@@ -10,9 +10,14 @@ window.addEventListener("DOMContentLoaded", () => {
     { job: "programmer", class: "is-danger" },
   ];
   
-  let classNames = arrayToPluck.pluck('class');
-  console.log(classNames);
+  let getClassNames = R.pluck('class');
+  let names = getClassNames(arrayToPluck);
+  console.log(names);
 
   const articles = document.querySelectorAll("article");
+  let i = 0;
+  articles.forEach(article => {
+    article.classList.add(names[i++]);
+  });
   
 });
